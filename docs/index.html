@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catalys+（カタリス）ダウンロード</title>
+<link rel="icon" href="emblem.png">
+<style>
+  :root { --bg:#14161c; --sf:#1d2029; --bd:#2b303c; --tx:#e8eaf0; --sub:#8a91a5; --ac:#f97316; --am:#fbbf24; --ok:#34d399; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--tx); font-family: "Yu Gothic UI", "Hiragino Sans", sans-serif; line-height: 1.7; }
+  main { max-width: 980px; margin: 0 auto; padding: 48px 20px 80px; }
+  .hero { text-align: center; }
+  .hero img.emb { width: 180px; height: 180px; }
+  .hero img.word { height: 48px; margin: 8px 0 14px; }
+  .lead { font-size: 22px; font-weight: bold; }
+  .sub { color: var(--sub); }
+  .dl { display: inline-block; margin: 26px 0 8px; background: var(--ac); color: #fff; text-decoration: none; font-weight: bold;
+        font-size: 18px; padding: 14px 34px; border-radius: 14px; }
+  .dl:hover { background: #ea580c; }
+  .meta { color: var(--sub); font-size: 13px; }
+  .meta code { font-size: 11px; word-break: break-all; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 44px 0; }
+  .card { background: var(--sf); border: 1px solid var(--bd); border-radius: 14px; padding: 18px; }
+  .card h3 { color: var(--am); font-size: 16px; margin-bottom: 6px; }
+  .shots img { width: 100%; border-radius: 12px; border: 1px solid var(--bd); margin: 10px 0; }
+  h2 { margin: 40px 0 12px; font-size: 20px; }
+  ol, ul { padding-left: 1.4em; }
+  .rel { border-left: 3px solid var(--ac); padding: 6px 14px; margin: 10px 0; background: var(--sf); border-radius: 0 10px 10px 0; }
+  .rel b { color: var(--am); }
+  footer { color: var(--sub); font-size: 12px; text-align: center; margin-top: 50px; }
+  @media (max-width: 760px) { .grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <section class="hero">
+    <img class="emb" src="emblem.png" alt="">
+    <div><img class="word" src="wordmark.png" alt="CATALYS+"></div>
+    <p class="lead">目標を渡せば、作って・動かして・確かめる。</p>
+    <p class="sub">ローカルAIのコード開発エージェント ― コードもデータもこの PC から出ません（Windows 10 / 11）</p>
+    <a class="dl" id="dl" href="#">ダウンロード</a>
+    <p class="meta" id="meta">読み込み中…</p>
+  </section>
+
+  <section class="grid">
+    <div class="card"><h3>開発</h3>手順を立て、コードを直し、テストで確かめ、失敗したら自分で直します。Python・JS/TS・PHP・Go・Ruby・C#・HTML/CSS。</div>
+    <div class="card"><h3>HP管理</h3>FileZilla のサイトを取り込み、AI で修正 → プレビュー → 確認して公開。公開前の状態にいつでも戻せます。WordPress の本文にも対応。</div>
+    <div class="card"><h3>学習</h3>言語とレベルを選ぶと課題を出し、アプリ内で書いて実行・答え合わせ。答えではなくヒントで導きます。</div>
+  </section>
+
+  <section class="shots">
+    <img src="06_done.png" alt="開発の画面" onerror="this.remove()">
+    <img src="10_site_done.png" alt="HP管理の画面" onerror="this.remove()">
+    <img src="12_learn.png" alt="学習の画面" onerror="this.remove()">
+  </section>
+
+  <h2>はじめかた</h2>
+  <ol>
+    <li>上のボタンから <b>CatalysPlusSetup.exe</b> をダウンロードして開きます（管理者権限は不要です）。</li>
+    <li>初回は「はじめの準備」で、AI を動かすソフト（Ollama）と AI モデルを自動で準備します。<br>
+        兄弟アプリ <b>Zealous</b> が入っていれば、その Ollama とモデルを共用します。</li>
+    <li>「作業フォルダを開く」を押して、やりたいことを書くだけです。</li>
+  </ol>
+  <p class="sub">作業中はいつでも <b>Ctrl+Shift+Alt+S</b>（どこからでも）で止められます。</p>
+
+  <h2>更新履歴</h2>
+  <div id="hist"></div>
+
+  <footer>Catalys+ — Zealous の兄弟ツール</footer>
+</main>
+<script>
+fetch("latest.json").then(r => r.json()).then(l => {
+  document.getElementById("dl").href = l.url;
+  document.getElementById("dl").textContent = `ダウンロード（v${l.version}）`;
+  document.getElementById("meta").innerHTML =
+    `${l.date} 公開 ・ ${(l.size / 1048576).toFixed(1)} MB<br>SHA-256: <code>${l.sha256}</code>`;
+}).catch(() => { document.getElementById("meta").textContent = "まだ公開された版がありません"; });
+fetch("releases.json").then(r => r.json()).then(hs => {
+  const el = document.getElementById("hist");
+  for (const h of hs.slice(0, 10)) {
+    const d = document.createElement("div");
+    d.className = "rel";
+    const ul = h.notes.map(n => `<li>${n.replace(/[<>&]/g, c => ({"<": "&lt;", ">": "&gt;", "&": "&amp;"})[c])}</li>`).join("");
+    d.innerHTML = `<b>v${h.version}</b> <span class="sub">${h.date}</span><ul>${ul}</ul>`;
+    el.appendChild(d);
+  }
+}).catch(() => {});
+</script>
+</body>
+</html>
