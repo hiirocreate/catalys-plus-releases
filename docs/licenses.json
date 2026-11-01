@@ -1,0 +1,11 @@
+{
+ "list": {
+  "v": 1,
+  "updated": "2026-11-01T11:33:42+00:00",
+  "revoked": [],
+  "expire_all_after": null,
+  "disable_all": false,
+  "limits": {}
+ },
+ "sig": "GeETOV3raFwhzb5E5Az8erfVJWvF58Qc1dlJPUS7PQC6SpViDe/BFgA0FlZN1JdFiaSMjLAKg2wFNaAF3Z21Cg=="
+}
