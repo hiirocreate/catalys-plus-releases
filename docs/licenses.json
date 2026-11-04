@@ -1,12 +1,14 @@
 {
  "list": {
   "v": 1,
-  "updated": "2026-11-04T01:02:27+00:00",
+  "updated": "2026-11-04T01:41:26+00:00",
   "revoked": [],
   "expire_all_after": null,
   "disable_all": false,
   "limits": {},
-  "deliver": {}
+  "deliver": {
+   "cd45c8c25ab6bed4ac27": "eyJpZCI6ImVhYjM5YTkwIiwibmFtZSI6InNhaS13IiwibWFjaGluZSI6IkEwREItQTkzQy1BQ0U1LTlEQkQiLCJleHAiOiIyMDI3LTA1LTAzIiwiaWF0IjoiMjAyNi0xMS0wNCIsInByb2R1Y3QiOiJjYXRhbHlzIn0.u8CQ4LNdGo63TgrxHaVqfikwUeSMWjL15ReBzbF2hxBxuc5Zp_xpxwrICBxR3S2jPciF0oby_xeiyqJLbJhVBA"
+  }
  },
- "sig": "UmYvAJGUH2tPbfnTnPnVoSKjiypR14WdPThbm4+k+1AgYaEIuJUM1J/6XrmVyAwEvXz4O+lxZR16ukNjnI4BDw=="
+ "sig": "qdr5WZikbvJsWlWmgpSQKtLL7eKg/PVOdLEU4qaTnrE7UYhUy4VZemq4U9bJCsteAMssBOyW/3IPlh4ZcVOuBA=="
 }
